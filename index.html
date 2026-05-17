@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rishikesh // Premium Command Hub</title>
+    <style>
+        :root {
+            --bg-main: #060913;
+            --panel-bg: #0b1329;
+            --panel-border: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-m-red: #ef4444;
+            --accent-m-blue: #2563eb;
+            --accent-orange: #f97316;
+            --accent-purple: #c084fc;
+            --accent-pink: #f43f5e;
+            --text-main: #f8fafc;
+            --text-darker: #64748b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        /* --- DYNAMIC RGB STREAMING PAGE BORDER --- */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 8px solid transparent;
+            border-image: linear-gradient(90deg, #ff007f, #7f00ff, #00f0ff, #00ff7f, #ffea00, #ff007f) 1;
+            background-size: 400% 400%;
+            pointer-events: none;
+            z-index: 99999;
+            animation: rgb-border-flow 12s linear infinite;
+        }
+
+        @keyframes rgb-border-flow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        body, html {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            cursor: none; 
+            overflow-x: hidden;
+        }
+
+        body {
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* --- ULTRA-FLUID CUSTOM POINTER FRAMEWORK --- */
+        #custom-pointer {
+            width: 10px;
+            height: 10px;
+            background: #ffffff;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10002;
+            box-shadow: 0 0 12px #ffffff, 0 0 20px var(--accent-blue);
+            will-change: transform;
+            transform: translate3d(-50%, -50%, 0);
+            transition: transform 0.1s ease, background-color 0.3s ease, height 0.3s ease, filter 0.3s ease;
+        }
+
+        /* Aura container with hardware acceleration rendering optimization */
+        #custom-aura {
+            width: 44px;
+            height: 44px;
+            border: 2px solid var(--accent-blue);
+            background: rgba(56, 189, 248, 0.12);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+            will-change: transform;
+            transform: translate3d(-50%, -50%, 0);
+            transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, border-color 0.3s ease, background 0.3s ease;
+        }
+
+        /* High-Definition Holographic Neon Umbrella Canopy Attachment (SCALED UP) */
+        #umbrella-attachment {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 10001;
+            display: none;
+            will-change: transform;
+            transform: translate3d(-50%, -50%, 0);
+            transition: transform 0.1s ease, filter 0.4s ease;
+        }
+
+        .umbrella-canvas {
+            display: block;
+            width: 130px; 
+            height: 130px;
+            filter: drop-shadow(0 0 18px var(--accent-blue)) drop-shadow(0 0 5px rgba(255,255,255,0.4));
+            animation: umbrella-sway 2.2s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+            transition: transform 0.4s ease, height 0.4s ease, filter 0.4s ease;
+        }
+
+        @keyframes umbrella-sway {
+            0% { transform: translateY(-75px) rotate(-8deg); } 
+            100% { transform: translateY(-75px) rotate(8deg); }
+        }
+
+        body.umbrella-active #umbrella-attachment {
+            display: block;
+        }
+
+        /* --- MELTING CURSOR DRIVER STATES --- */
+        body.cursor-melting #custom-pointer {
+            filter: blur(1px) contrast(140%);
+            background-color: var(--accent-orange);
+            transform: translate3d(-50%, -50%, 0) scaleY(3.5) scaleX(0.6);
+            box-shadow: 0 0 15px var(--accent-orange), 0 0 25px var(--accent-m-red);
+        }
+
+        body.cursor-melting #custom-aura {
+            border-color: var(--accent-m-red);
+            background: rgba(239, 68, 68, 0.05);
+            transform: translate3d(-50%, -50%, 0) scaleY(1.8) scaleX(0.8);
+            box-shadow: 0 0 35px rgba(239, 68, 68, 0.4);
+        }
+
+        body.cursor-melting #umbrella-attachment {
+            filter: blur(1px) contrast(130%) drop-shadow(0 0 20px var(--accent-orange));
+        }
+
+        body.cursor-melting .umbrella-canvas {
+            animation: umbrella-sway 1.2s ease-in-out infinite alternate; /* Panicked sway in heat */
+            transform: scaleY(1.9) scaleX(0.7); /* Slumps and stretches downward */
+        }
+
+        .cursor-spark {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            will-change: transform, opacity;
+            animation: spark-burnout 0.4s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+        }
+
+        @keyframes spark-burnout {
+            0% { opacity: 1; transform: translate3d(-50%, -50%, 0) scale(1); }
+            100% { opacity: 0; transform: translate3d(-50%, -140%, 0) scale(2.5); }
+        }
+
+        body:active:not(.cursor-melting) #custom-pointer { transform: translate3d(-50%, -50%, 0) scale(0.5); background: var(--accent-orange); }
+        body:active:not(.cursor-melting) #custom-aura {
+            border-color: var(--accent-orange);
+            background: rgba(249, 115, 22, 0.2);
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
+        }
+
+        a, button, input, select, .white-key, .black-key, .cube-timer-engine, canvas, .grid-cell, .mobile-egg-trigger, .close-btn-mock {
+            cursor: none !important;
+        }
+
+        /* --- MOBILE ENVIRONMENTAL CONTROL INTERFACES --- */
+        .mobile-egg-bar {
+            position: fixed;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 100005;
+        }
+
+        .mobile-egg-trigger {
+            background: rgba(15, 23, 42, 0.85);
+            color: #fff;
+            border: 1px solid var(--panel-border);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: all 0.2s ease;
+        }
+
+        .mobile-egg-trigger.active-rain { border-color: var(--accent-blue); background: rgba(56, 189, 248, 0.2); box-shadow: 0 0 15px var(--accent-blue); }
+        .mobile-egg-trigger.active-thunder { border-color: var(--accent-purple); background: rgba(192, 132, 252, 0.2); box-shadow: 0 0 15px var(--accent-purple); }
+        .mobile-egg-trigger.active-flame { border-color: var(--accent-m-red); background: rgba(239, 68, 68, 0.2); box-shadow: 0 0 15px var(--accent-m-red); }
+
+        /* --- EASTER EGG LAYERS --- */
+        #weather-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9990;
+        }
+
+        #lightning-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #ffffff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 9991;
+        }
+
+        #fire-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100vw;
+            height: 60vh;
+            pointer-events: none;
+            z-index: 9992;
+            background: linear-gradient(to top, rgba(239, 68, 68, 0.4) 0%, rgba(249, 115, 22, 0.1) 60%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        #fire-overlay.ignited {
+            opacity: 1;
+        }
+
+        .fire-particle {
+            position: absolute;
+            bottom: -20px;
+            border-radius: 50%;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            animation: fire-rise linear infinite;
+        }
+
+        @keyframes fire-rise {
+            0% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; filter: blur(2px); }
+            50% { opacity: 0.8; filter: blur(6px); }
+            100% { transform: translateY(-55vh) scale(0.1) rotate(360deg); opacity: 0; filter: blur(12px); }
+        }
+
+        /* --- SITE STRUCTURAL WRAPPER --- */
+        .wrapper {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* --- PROFILE HERO BLOCK --- */
+        .profile-hero {
+            background: linear-gradient(145deg, #0f172a 0%, #020617 100%);
+            border-radius: 32px;
+            padding: 4rem;
+            border: 1px solid var(--panel-border);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 2rem;
+        }
+
+        .hero-title h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            background: linear-gradient(to right, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title p {
+            color: var(--accent-blue);
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .close-btn-mock {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 1.1rem;
+            font-weight: 800;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn-mock:hover {
+            background: var(--accent-m-red);
+            color: #fff;
+            border-color: var(--accent-m-red);
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.5);
+        }
+
+        /* --- DOSSIER MATRIX --- */
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .dossier-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.2rem;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+
+        .dossier-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dossier-card h3 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-about h3 { color: var(--accent-purple); }
+        .card-m-performance h3 { color: var(--accent-m-red); }
+        .card-athletics h3 { color: var(--accent-blue); }
+
+        .dossier-card p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin-top: auto;
+            background: rgba(2, 6, 23, 0.4);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .spec-list li {
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .spec-list li:not(:last-child) { border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .spec-list li .label { color: var(--text-darker); font-weight: 500; }
+        .spec-list li .value { color: #f8fafc; font-weight: 700; }
+
+        /* --- APPS SYSTEM STRUCTURE --- */
+        .app-card {
+            background: var(--panel-bg);
+            border-radius: 28px;
+            padding: 3.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--panel-border);
+        }
+
+        .app-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--panel-border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* --- CUBE 2048 MINI-GAME --- */
+        .game-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .game-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            background: #030712;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--panel-border);
+        }
+
+        .score-container { font-size: 1.1rem; font-weight: bold; }
+        .score-container span { color: var(--accent-orange); font-family: 'SF Mono', monospace; font-size: 1.3rem; }
+
+        .grid-container {
+            width: 400px;
+            height: 400px;
+            background: #030712;
+            border-radius: 16px;
+            padding: 12px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            gap: 12px;
+            border: 2px solid var(--panel-border);
+            position: relative;
+        }
+
+        .grid-cell {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #fff;
+            transition: all 0.1s ease-in-out;
+            user-select: none;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .tile-2    { background: #ffffff; color: #0f172a; box-shadow: inset 0 0 10px rgba(0,0,0,0.2); }
+        .tile-4    { background: #e2e8f0; color: #0f172a; }
+        .tile-8    { background: #3b82f6; color: #fff; text-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .tile-16   { background: #1d4ed8; color: #fff; } 
+        .tile-32   { background: #ef4444; color: #fff; }
+        .tile-64   { background: #b91c1c; color: #fff; }
+        .tile-128  { background: #f97316; color: #fff; box-shadow: 0 0 15px rgba(249,115,22,0.5); }
+        .tile-256  { background: #ea580c; color: #fff; }
+        .tile-512  { background: #22c55e; color: #fff; }
+        .tile-1024 { background: #eab308; color: #fff; }
+        .tile-2048 { background: #c084fc; color: #fff; box-shadow: 0 0 25px #c084fc; }
+
+        .game-over-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(6, 9, 19, 0.9);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 50;
+        }
+
+        .game-over-overlay.active { opacity: 1; pointer-events: auto; }
+        .game-over-overlay h3 { font-size: 2.5rem; color: var(--accent-m-red); font-weight: 900; }
+
+        /* --- CUBING SYSTEM --- */
+        .cube-grid { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+        .cube-timer-engine {
+            flex: 2; background: #030712; border-radius: 24px; padding: 6rem 2rem; text-align: center;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 2px dashed #334155; min-width: 350px; user-select: none; transition: all 0.2s ease;
+        }
+        .cube-timer-engine:hover { border-color: var(--accent-orange); background: #070f21; }
+        .cube-digits {
+            font-family: 'SF Mono', Consolas, monospace; font-size: 8rem; font-weight: 800;
+            color: var(--accent-orange); text-shadow: 0 0 40px rgba(249, 115, 22, 0.3); margin: 1rem 0;
+        }
+        .cube-stats-panel { flex: 1; background: #0f172a; border-radius: 24px; padding: 2.5rem; min-width: 300px; max-height: 440px; display: flex; flex-direction: column; }
+        .solve-log-container { overflow-y: auto; margin-top: 1.5rem; flex-grow: 1; list-style: none; }
+        .solve-log-container li { background: #030712; padding: 1.2rem 1.4rem; margin-bottom: 0.75rem; border-radius: 12px; display: flex; flex-direction: column; gap: 0.5rem; font-weight: 600; border-left: 4px solid var(--accent-orange); }
+        .log-meta-line { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .comment-box { font-size: 0.85rem; font-weight: 600; padding: 0.5rem 0.75rem; border-radius: 6px; line-height: 1.4; }
+        .comment-godly { background: rgba(192, 132, 252, 0.15); color: #c084fc; border: 1px solid rgba(192, 132, 252, 0.3); text-shadow: 0 0 10px rgba(192, 132, 252, 0.2); }
+        .comment-good { background: rgba(239, 68, 68, 0.12); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.25); }
+        .comment-standard { background: rgba(148, 163, 184, 0.1); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.2); }
+
+        /* --- SCOREBOARD --- */
+        .sports-toggle-bar { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2.5rem; }
+        .toggle-btn { background: #1e293b; color: var(--text-main); border: none; padding: 1rem 2.5rem; font-size: 1.1rem; font-weight: 700; border-radius: 50px; transition: all 0.2s; }
+        .toggle-btn.active.tennis-mode { background: #a3e635; color: #000; box-shadow: 0 0 25px rgba(163, 230, 53, 0.4); }
+        .toggle-btn.active.badminton-mode { background: var(--accent-blue); color: #fff; box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); }
+        .scoreboard-core { display: flex; justify-content: space-around; align-items: center; background: #030712; border-radius: 24px; padding: 4rem 2rem; flex-wrap: wrap; gap: 2rem; }
+        .team-box { text-align: center; flex: 1; min-width: 250px; }
+        .team-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 1.5rem; color: var(--text-darker); text-transform: uppercase; letter-spacing: 1px; }
+        .team-box.serving-now .team-title { color: var(--accent-blue); }
+        .team-box.serving-now .team-title::before { content: '⚡ '; }
+        .digital-counter { font-family: 'SF Mono', Consolas, monospace; font-size: 7rem; font-weight: 800; background: #000; padding: 1rem 3rem; border-radius: 20px; color: #ef4444; text-shadow: 0 0 25px rgba(239, 68, 68, 0.5); display: inline-block; min-width: 200px; user-select: none; }
+        .set-counter-label { font-size: 1.3rem; color: #94a3b8; margin-top: 1rem; font-weight: bold; }
+        .vs-sign { font-size: 2.2rem; font-weight: 900; color: #334155; }
+        .control-row { display: flex; justify-content: space-around; margin-top: 3rem; flex-wrap: wrap; gap: 2rem; }
+        .action-button { background: #1e293b; color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 700; font-size: 1rem; transition: background 0.2s; }
+        .action-button:hover { background: #334155; }
+
+        /* --- PIANO --- */
+        .piano-outer-frame { background: #020617; padding: 3.5rem 2.5rem; border-radius: 24px; box-shadow: inset 0 0 50px rgba(0,0,0,0.9); }
+        .piano-bed { display: flex; position: relative; height: 290px; background: #000; border-radius: 0 0 16px 16px; overflow-x: auto; }
+        .white-key { width: 75px; height: 275px; background: linear-gradient(to bottom, #f8fafc 0%, #ffffff 100%); border: 1px solid #cbd5e1; border-radius: 0 0 10px 10px; position: relative; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1.5rem; color: #0f172a; font-weight: 800; font-size: 1.1rem; user-select: none; z-index: 1; }
+        .white-key:active { background: linear-gradient(to bottom, #e2e8f0 0%, #cbd5e1 100%); }
+        .black-key { width: 44px; height: 165px; background: linear-gradient(to bottom, #475569 0%, #000000 100%); border: 1px solid #000; border-radius: 0 0 6px 6px; position: absolute; margin-left: -22px; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 1rem; color: #fff; font-size: 0.85rem; user-select: none; }
+        .black-key:active { background: linear-gradient(to bottom, #334155 0%, #000000 100%); }
+        .engine-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; background: #0f172a; padding: 1.5rem; border-radius: 16px; flex-wrap: wrap; gap: 1rem; }
+        .engine-controls select { background: #030712; color: white; border: 1px solid #334155; padding: 0.75rem 1.5rem; border-radius: 10px; font-size: 1rem; outline: none; font-weight: 600; }
+
+        /* --- METRONOME --- */
+        .metro-interface { display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 3rem; background: #030712; padding: 3rem; border-radius: 24px; }
+        .metro-bpm-display { font-family: 'SF Mono', monospace; font-size: 6rem; font-weight: 800; color: var(--accent-pink); margin-bottom: 0.5rem; }
+        .metro-slider { width: 280px; margin: 1.5rem 0; accent-color: var(--accent-pink); }
+        .metro-visual-indicator { width: 45px; height: 45px; background-color: #1e293b; border-radius: 50%; margin: 0 auto; transition: background-color 0.1s ease; }
+        .metro-visual-indicator.flash { background-color: var(--accent-pink); box-shadow: 0 0 25px var(--accent-pink); }
+    </style>
+</head>
+<body>
+
+    <!-- HIGH PERFORMANCE LIGHT-REACTIVE OVERLAY DRIVERS -->
+    <div id="custom-pointer"></div>
+    <div id="custom-aura"></div>
+
+    <!-- VECTOR RENDERED PREMIUM HOLO UMBRELLA -->
+    <div id="umbrella-attachment">
+        <svg class="umbrella-canvas" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Canopy Outer Glow Base -->
+            <path d="M10,50 Q50,15 90,50 Q76,45 63,50 Q50,45 37,50 Q23,45 10,50 Z" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round"/>
+            <!-- Structural Umbrella Ribs for Premium Depth -->
+            <path d="M50,19 Q62,38 63,50" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.7"/>
+            <path d="M50,19 Q38,38 37,50" fill="none" stroke="#38bdf8" stroke-width="1.2" opacity="0.7"/>
+            <path d="M50,19 Q50,38 50,46" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+            <!-- Handle J-Stick Core Frame -->
+            <path d="M50,46 L50,76 Q50,84 58,84 Q64,84 64,78" fill="none" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"/>
+            <!-- Apex Point Tip Accent -->
+            <circle cx="50" cy="17" r="2.5" fill="#f8fafc"/>
+        </svg>
+    </div>
+
+    <!-- MOBILE ACCESSIBLE ACTION TRIGGERS -->
+    <div class="mobile-egg-bar">
+        <button class="mobile-egg-trigger" id="btnEggRain" onclick="toggleRain()">🌧️ Torrential Rain (R)</button>
+        <button class="mobile-egg-trigger" id="btnEggThunder" onclick="toggleThunder()">⚡ Storm (T)</button>
+        <button class="mobile-egg-trigger" id="btnEggFlame" onclick="toggleFlames()">🔥 Blaze (F)</button>
+    </div>
+
+    <!-- ENVIRONMENT CONTROLLERS -->
+    <canvas id="weather-canvas"></canvas>
+    <div id="lightning-flash"></div>
+    <div id="fire-overlay"></div>
+
+    <div class="wrapper">
+        
+        <!-- PROFILE HERO MODULE -->
+        <section class="profile-hero">
+            <header class="hero-header">
+                <div class="hero-title">
+                    <h1>Rishikesh</h1>
+                    <p>Core System Operator & Personal Portfolio Hub</p>
+                </div>
+                <button class="close-btn-mock" id="mockCloseBtn" title="Welcome Terminal Status Display">X</button>
+            </header>
+
+            <div class="dossier-grid">
+                <div class="dossier-card card-about">
+                    <h3>👤 About Me</h3>
+                    <p>Primary user portfolio criteria configuration profiles. Navigating structural athletic training metrics and engineering study sets.</p>
+                    <ul class="spec-list">
+                        <li><span class="label">Operator Name</span> <span class="value">Rishikesh</span></li>
+                        <li><span class="label">Academic Rank</span> <span class="value">Grade 8 Student</span></li>
+                    </ul>
+                </div>
+
+                <div class="dossier-card card-athletics">
+                    <h3>🏸 Tennis Athletics Progression</h3>
+                    <p>Actively developing skill sets on court for <strong>one full year</strong>. Targeting training hours on explosive structural footwork, accurate baseline ball placement, and maintaining extreme velocity outputs.</p>
+                    <ul class="spec-list">
+                        <li><span class="label">Active Experience</span> <span class="value">1 Year Training</span></li>
+                        <li><span class="label">Primary Focus</span> <span class="value">Precision Placements & Serve Core</span></li>
+                        <li><span class="label">Court Velocity Style</span> <span class="value">High Intensity Frameworks</span></li>
+                    </ul>
+                </div>
+                
+                <div class="dossier-card card-m-performance">
+                    <h3>🇩🇪 Ultimate Dream Vehicle // BMW M4</h3>
+                    <p>The <strong>BMW M4 Competition</strong> is the absolute dream vehicle target. Driven by deep fascination for its aggressive track stance, high-revving twin-turbo power thresholds, and unmatched mechanical tuning capabilities.</p>
+                    <ul class="spec-list">
+                        <li><span class="label">Dream Silhouette</span> <span class="value">BMW M4 Competition</span></li>
+                        <li><span class="label">Engineering Core</span> <span class="value">High-Rev Twin-Turbo Inline 6</span></li>
+                        <li><span class="label">Body Blueprint Type</span> <span class="value">Track-Spec Performance Coupe</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CUBE 2048 MINI GAME -->
+        <section class="app-card">
+            <h2 class="app-title">🎮 Cube 2048 // System Brain Break</h2>
+            <p style="color: var(--text-darker); margin-bottom: 1.5rem;">Use your keyboard <strong>Arrow Keys</strong> or swipe/click blocks to merge numbers. Match up tiles to hit the ultimate purple 2048 threshold!</p>
+            
+            <div class="game-layout">
+                <div class="game-bar">
+                    <div class="score-container">Score: <span id="gameScore">0</span></div>
+                    <button class="action-button" style="background: var(--accent-blue);" onclick="resetGame()">Restart Mini-Game</button>
+                </div>
+                
+                <div class="grid-container" id="gridBox">
+                    <div class="game-over-overlay" id="gameOverBlock">
+                        <h3>Grid Locked!</h3>
+                        <p style="color: #94a3b8;">No valid combinations remaining.</p>
+                        <button class="action-button" style="background: var(--accent-orange);" onclick="resetGame()">Try Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPEEDCUBING TIMER ENGINE -->
+        <section class="app-card">
+            <h2 class="app-title">🧩 Cubing Engine Console</h2>
+            <p style="color: var(--text-darker); margin-bottom: 1.5rem;">Tap the execution engine terminal or punch the <strong>Spacebar</strong> to engage, freeze, and index live timing runs.</p>
+            
+            <div class="cube-grid">
+                <div class="cube-timer-engine" id="timeBox" onmousedown="triggerTimer()" ontouchstart="triggerTimer()">
+                    <div style="font-size: 0.95rem; color: var(--text-darker); letter-spacing: 1px; font-weight: bold;">CAPTURE TERMINAL</div>
+                    <div class="cube-digits" id="timeDisplay">0.000</div>
+                    <div style="color: #475569; font-weight: bold; letter-spacing: 2px;" id="timeStatus">CONSOLE READY</div>
+                </div>
+
+                <div class="cube-stats-panel">
+                    <h3 style="font-size: 1.2rem; border-bottom: 1px solid #334155; padding-bottom: 8px;">Run Registry</h3>
+                    <ul class="solve-log-container" id="logWrapper">
+                        <li style="color: var(--text-darker); text-align: center; display: block; border: none; padding-top: 2rem;">No logged runs in local workspace memory stack.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- SCOREBOARD SYSTEM -->
+        <section class="app-card">
+            <h2 class="app-title">🏆 Score Matrix & Arbitration Board</h2>
+            <div class="sports-toggle-bar">
+                <button id="btnTen" class="toggle-btn active tennis-mode" onclick="toggleSport('tennis')">Tennis Mode</button>
+                <button id="btnBad" class="toggle-btn badminton-mode" onclick="toggleSport('badminton')">Badminton Mode</button>
+            </div>
+
+            <div class="scoreboard-core">
+                <div class="team-box serving-now" id="team1Frame">
+                    <div class="team-title">Competitor A</div>
+                    <div id="scoreA" class="digital-counter">0</div>
+                    <div id="setsA" class="set-counter-label">Games: 0</div>
+                </div>
+                <div class="vs-sign">VS</div>
+                <div class="team-box" id="team2Frame">
+                    <div class="team-title">Competitor B</div>
+                    <div id="scoreB" class="digital-counter">0</div>
+                    <div id="setsB" class="set-counter-label">Games: 0</div>
+                </div>
+            </div>
+
+            <div class="control-row">
+                <div>
+                    <button class="action-button" onclick="addPoint(1)">+ Point A</button>
+                    <button class="action-button" style="background:#991b1b" onclick="removePoint(1)">- 1</button>
+                </div>
+                <button class="action-button" style="background:#0284c7" onclick="togglePossession()">Swap Service</button>
+                <div>
+                    <button class="action-button" onclick="addPoint(2)">+ Point B</button>
+                    <button class="action-button" style="background:#991b1b" onclick="removePoint(2)">- 1</button>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2.5rem;">
+                <button class="action-button" style="background: #e11d48;" onclick="clearScoreboard()">Reset Board Matrix</button>
+            </div>
+        </section>
+
+        <!-- SOUND GENERATOR -->
+        <section class="app-card">
+            <h2 class="app-title">🎹 Polyphonic Wave Sound Generator</h2>
+            <div class="engine-controls">
+                <div>
+                    <label for="oscType" style="font-weight: 700; font-size: 1rem; margin-right: 10px;">Waveform Model: </label>
+                    <select id="oscType">
+                        <option value="sine">Sine Wave (Pure Tone)</option>
+                        <option value="triangle" selected>Triangle Wave (Warm Woodwind Acoustic)</option>
+                        <option value="sawtooth">Sawtooth Wave (Aggressive Synthesizer)</option>
+                        <option value="square">Square Wave (Retro 8-Bit Lead)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="piano-outer-frame">
+                <div class="piano-bed">
+                    <div class="white-key" onclick="triggerOscNote('C4')">C4</div>
+                    <div class="black-key" style="left: 58px;" onclick="triggerOscNote('C#4')">C#4</div>
+                    <div class="white-key" onclick="triggerOscNote('D4')">D4</div>
+                    <div class="black-key" style="left: 133px;" onclick="triggerOscNote('D#4')">D#4</div>
+                    <div class="white-key" onclick="triggerOscNote('E4')">E4</div>
+                    <div class="white-key" onclick="triggerOscNote('F4')">F4</div>
+                    <div class="black-key" style="left: 283px;" onclick="triggerOscNote('F#4')">F#4</div>
+                    <div class="white-key" onclick="triggerOscNote('G4')">G4</div>
+                    <div class="black-key" style="left: 358px;" onclick="triggerOscNote('G#4')">G#4</div>
+                    <div class="white-key" onclick="triggerOscNote('A4')">A4</div>
+                    <div class="black-key" style="left: 433px;" onclick="triggerOscNote('A#4')">A#4</div>
+                    <div class="white-key" onclick="triggerOscNote('B4')">B4</div>
+                    <div class="white-key" onclick="triggerOscNote('C5')">C5</div>
+                    <div class="black-key" style="left: 583px;" onclick="triggerOscNote('C#5')">C#5</div>
+                    <div class="white-key" onclick="triggerOscNote('D5')">D5</div>
+                    <div class="black-key" style="left: 658px;" onclick="triggerOscNote('D#5')">D#5</div>
+                    <div class="white-key" onclick="triggerOscNote('E5')">E5</div>
+                    <div class="white-key" onclick="triggerOscNote('F5')">F5</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- METRONOME -->
+        <section class="app-card">
+            <h2 class="app-title">⏱️ Studio Pace Metronome & BPM Tapper</h2>
+            <div class="metro-interface">
+                <div style="text-align: center;">
+                    <div class="metro-bpm-display" id="bpmValue">120</div>
+                    <input type="range" min="40" max="240" value="120" class="metro-slider" id="bpmSlider" oninput="changeBPM(this.value)">
+                </div>
+                <div style="text-align: center; display: flex; flex-direction: column; gap: 1.5rem;">
+                    <div class="metro-visual-indicator" id="visualPulse"></div>
+                    <div>
+                        <button class="action-button" style="background: var(--accent-pink);" id="metroPlayBtn" onclick="toggleMetronome()">Engage Pulse</button>
+                        <button class="action-button" style="background: #1e293b;" onclick="tapBPM()">Tap Beat</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // --- HIGH PERFORMANCE POINTER FRAMEWORK ---
+        const pointerCore = document.getElementById('custom-pointer');
+        const pointerAura = document.getElementById('custom-aura');
+        const umbrellaAttachment = document.getElementById('umbrella-attachment');
+
+        let mouseX = 0, mouseY = 0;
+        let auraX = 0, auraY = 0;
+        let umbrellaX = 0, umbrellaY = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            // Instant 1:1 snap for the primary center point
+            pointerCore.style.left = mouseX + 'px';
+            pointerCore.style.top = mouseY + 'px';
+            
+            if (Math.random() > 0.3) createSparkParticle(mouseX, mouseY);
+        });
+
+        // High frequency animation tick running at display refresh rate
+        function updateCursorPositions() {
+            // Smooth linear interpolation (lerp) tracking
+            auraX += (mouseX - auraX) * 0.35; 
+            auraY += (mouseY - auraY) * 0.35;
+            
+            umbrellaX += (mouseX - umbrellaX) * 0.22; 
+            umbrellaY += (mouseY - umbrellaY) * 0.22;
+
+            pointerAura.style.left = auraX + 'px';
+            pointerAura.style.top = auraY + 'px';
+            
+            umbrellaAttachment.style.left = umbrellaX + 'px';
+            umbrellaAttachment.style.top = umbrellaY + 'px';
+
+            requestAnimationFrame(updateCursorPositions);
+        }
+        requestAnimationFrame(updateCursorPositions);
+
+        function createSparkParticle(x, y) {
+            const spark = document.createElement('div');
+            spark.className = 'cursor-spark';
+            spark.style.left = '0px';
+            spark.style.top = '0px';
+            spark.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            const hexes = ['#38bdf8', '#ffffff', '#f97316'];
+            spark.style.backgroundColor = hexes[Math.floor(Math.random() * hexes.length)];
+            document.body.appendChild(spark);
+            setTimeout(() => spark.remove(), 400);
+        }
+
+        function initInteractiveHoverStates() {
+            document.querySelectorAll('button, select, input, .white-key, .black-key, .cube-timer-engine, .grid-cell, .mobile-egg-trigger, .close-btn-mock').forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    if (!isFlamesOn) {
+                        pointerAura.style.width = '56px'; pointerAura.style.height = '56px';
+                        pointerCore.style.backgroundColor = 'var(--accent-blue)';
+                    }
+                });
+                item.addEventListener('mouseleave', () => {
+                    if (!isFlamesOn) {
+                        pointerAura.style.width = '44px'; pointerAura.style.height = '44px';
+                        pointerCore.style.backgroundColor = '#ffffff';
+                    }
+                });
+            });
+        }
+        initInteractiveHoverStates();
+
+        // --- ENHANCED WEATHER & FLAME INTERACTION LOGIC ---
+        const weatherCanvas = document.getElementById('weather-canvas');
+        const weatherCtx = weatherCanvas.getContext('2d');
+        const lightningFlash = document.getElementById('lightning-flash');
+        const fireOverlay = document.getElementById('fire-overlay');
+
+        let isRaining = false;
+        let isThundering = false;
+        let isFlamesOn = false;
+        let raindrops = [];
+        let weatherAnimationId = null;
+        let flameIntervalId = null;
+
+        function resizeWeatherCanvas() {
+            weatherCanvas.width = window.innerWidth;
+            weatherCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeWeatherCanvas);
+        resizeWeatherCanvas();
+
+        function evaluateUmbrellaState() {
+            if (isRaining || isThundering) {
+                document.body.classList.add('umbrella-active');
+            } else {
+                document.body.classList.remove('umbrella-active');
+            }
+        }
+
+        function toggleRain() {
+            isRaining = !isRaining;
+            document.getElementById('btnEggRain').classList.toggle('active-rain', isRaining);
+            evaluateUmbrellaState();
+            manageWeatherAnimation();
+        }
+
+        function toggleThunder() {
+            isThundering = !isThundering;
+            document.getElementById('btnEggThunder').classList.toggle('active-thunder', isThundering);
+            if(isThundering && !isRaining) {
+                isRaining = true;
+                document.getElementById('btnEggRain').classList.add('active-rain', true);
+            }
+            evaluateUmbrellaState();
+            manageWeatherAnimation();
+        }
+
+        function toggleFlames() {
+            isFlamesOn = !isFlamesOn;
+            document.getElementById('btnEggFlame').classList.toggle('active-flame', isFlamesOn);
+            
+            if(isFlamesOn) {
+                fireOverlay.classList.add('ignited');
+                document.body.classList.add('cursor-melting'); // Engage melting modifiers
+                flameIntervalId = setInterval(spawnFireParticle, 12);
+            } else {
+                fireOverlay.classList.remove('ignited');
+                document.body.classList.remove('cursor-melting'); // Cool down back to baseline structural scale
+                clearInterval(flameIntervalId);
+                fireOverlay.innerHTML = '';
+            }
+        }
+
+        function manageWeatherAnimation() {
+            if ((isRaining || isThundering) && !weatherAnimationId) {
+                raindrops = [];
+                const extremeDensityRainThreshold = 350; 
+                for(let i = 0; i < extremeDensityRainThreshold; i++) {
+                    raindrops.push({
+                        x: Math.random() * weatherCanvas.width,
+                        y: Math.random() * weatherCanvas.height,
+                        speed: Math.random() * 20 + 22, 
+                        length: Math.random() * 25 + 20, 
+                        weight: Math.random() * 1.3 + 1.0
+                    });
+                }
+                renderWeatherLoop();
+            } else if (!isRaining && !isThundering && weatherAnimationId) {
+                cancelAnimationFrame(weatherAnimationId);
+                weatherAnimationId = null;
+                weatherCtx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+            }
+        }
+
+        function renderWeatherLoop() {
+            weatherCtx.clearRect(0, 0, weatherCanvas.width, weatherCanvas.height);
+            
+            if(isRaining) {
+                weatherCtx.strokeStyle = 'rgba(186, 210, 235, 0.6)'; 
+                weatherCtx.lineCap = 'round';
+                
+                raindrops.forEach(drop => {
+                    weatherCtx.lineWidth = drop.weight;
+                    weatherCtx.beginPath();
+                    weatherCtx.moveTo(drop.x, drop.y);
+                    weatherCtx.lineTo(drop.x + 2, drop.y + drop.length); 
+                    weatherCtx.stroke();
+                    
+                    drop.y += drop.speed;
+                    drop.x += 1.5; 
+                    if (drop.y > weatherCanvas.height) {
+                        drop.y = -35;
+                        drop.x = Math.random() * weatherCanvas.width;
+                    }
+                });
+            }
+
+            if(isThundering && Math.random() > 0.975) {
+                lightningFlash.style.opacity = '0.95';
+                setTimeout(() => { lightningFlash.style.opacity = '0'; }, 50);
+                if(Math.random() > 0.5) {
+                    setTimeout(() => {
+                        lightningFlash.style.opacity = '0.7';
+                        setTimeout(() => { lightningFlash.style.opacity = '0'; }, 30);
+                    }, 100);
+                }
+            }
+
+            weatherAnimationId = requestAnimationFrame(renderWeatherLoop);
+        }
+
+        function spawnFireParticle() {
+            if(!isFlamesOn) return;
+            const particle = document.createElement('div');
+            particle.className = 'fire-particle';
+            
+            const size = Math.random() * 70 + 30;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.left = `${Math.random() * 100}vw`;
+            particle.style.animationDuration = `${Math.random() * 1.5 + 0.8}s`;
+            
+            const flameTypeSelector = Math.random();
+            if (flameTypeSelector > 0.65) {
+                particle.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(244,114,182,0.9) 30%, rgba(249,115,22,0.6) 70%, transparent 100%)';
+            } else if (flameTypeSelector > 0.25) {
+                particle.style.background = 'radial-gradient(circle, rgba(253,186,116,1) 10%, rgba(239,68,68,0.8) 50%, rgba(185,28,28,0.3) 80%, transparent 100%)';
+            } else {
+                particle.style.background = 'radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(244,63,94,0.2) 40%, transparent 100%)';
+            }
+            
+            fireOverlay.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, 2200);
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'SELECT') return;
+            const keyUpper = e.key.toUpperCase();
+            if (keyUpper === 'R') { e.preventDefault(); toggleRain(); }
+            if (keyUpper === 'T') { e.preventDefault(); toggleThunder(); }
+            if (keyUpper === 'F') { e.preventDefault(); toggleFlames(); }
+        });
+
+
+        // --- MINI-GAME CORE LOGIC ENGINE: 2048 ---
+        let board = Array(16).fill(0);
+        let gameScore = 0;
+        const gridBox = document.getElementById('gridBox');
+
+        function initGameLayout() {
+            for(let i=0; i<16; i++) {
+                let cell = document.createElement('div');
+                cell.className = 'grid-cell'; cell.id = 'cell-' + i;
+                gridBox.appendChild(cell);
+            }
+            resetGame();
+        }
+
+        function resetGame() {
+            board.fill(0); gameScore = 0;
+            document.getElementById('gameScore').innerText = gameScore;
+            document.getElementById('gameOverBlock').classList.remove('active');
+            spawnTile(); spawnTile(); updateGridDisplay();
+        }
+
+        function spawnTile() {
+            let empties = [];
+            board.forEach((val, index) => { if(val === 0) empties.push(index); });
+            if(empties.length > 0) {
+                let randomCell = empties[Math.floor(Math.random() * empties.length)];
+                board[randomCell] = Math.random() < 0.9 ? 2 : 4;
+            }
+        }
+
+        function updateGridDisplay() {
+            for(let i=0; i<16; i++) {
+                let cell = document.getElementById('cell-' + i);
+                cell.innerText = board[i] > 0 ? board[i] : '';
+                cell.className = 'grid-cell'; 
+                if(board[i] > 0) cell.classList.add('tile-' + board[i]);
+            }
+            initInteractiveHoverStates();
+        }
+
+        function compressRow(row) {
+            let filtered = row.filter(val => val !== 0);
+            for(let i = 0; i < filtered.length - 1; i++) {
+                if(filtered[i] === filtered[i+1]) {
+                    filtered[i] *= 2; gameScore += filtered[i]; filtered[i+1] = 0;
+                }
+            }
+            filtered = filtered.filter(val => val !== 0);
+            while(filtered.length < 4) filtered.push(0);
+            return filtered;
+        }
+
+        function compressInverseRow(row) {
+            let filtered = row.filter(val => val !== 0);
+            for(let i = filtered.length - 1; i > 0; i--) {
+                if(filtered[i] === filtered[i-1]) {
+                    filtered[i] *= 2; gameScore += filtered[i]; filtered[i-1] = 0;
+                }
+            }
+            filtered = filtered.filter(val => val !== 0);
+            while(filtered.length < 4) filtered.unshift(0);
+            return filtered;
+        }
+
+        function handleMove(direction) {
+            let pastState = [...board];
+            if(direction === 'left' || direction === 'right') {
+                for(let i=0; i<4; i++) {
+                    let start = i * 4; let row = board.slice(start, start + 4);
+                    let processed = direction === 'left' ? compressRow(row) : compressInverseRow(row);
+                    board.splice(start, 4, ...processed);
+                }
+            } else {
+                for(let col=0; col<4; col++) {
+                    let column = [board[col], board[col+4], board[col+8], board[col+12]];
+                    let processed = direction === 'up' ? compressRow(column) : compressInverseRow(column);
+                    for(let r=0; r<4; r++) board[col + r*4] = processed[r];
+                }
+            }
+            if(board.some((val, i) => val !== pastState[i])) {
+                spawnTile(); document.getElementById('gameScore').innerText = gameScore; updateGridDisplay();
+                if(!movesLeftAvailable()) document.getElementById('gameOverBlock').classList.add('active');
+            }
+        }
+
+        function movesLeftAvailable() {
+            if(board.includes(0)) return true;
+            for(let i=0; i<16; i++) {
+                if(i % 4 < 3 && board[i] === board[i+1]) return true;
+                if(i < 12 && board[i] === board[i+4]) return true;
+            }
+            return false;
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                if(document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'SELECT') {
+                    e.preventDefault();
+                    if(e.key === 'ArrowLeft') handleMove('left');
+                    if(e.key === 'ArrowRight') handleMove('right');
+                    if(e.key === 'ArrowUp') handleMove('up');
+                    if(e.key === 'ArrowDown') handleMove('down');
+                }
+            }
+        });
+        initGameLayout();
+
+        // --- CUBING CLOCK RUNTIME ---
+        let runningState = false; let initialTime = 0; let loopInterval = null; let runningHistory = [];
+        function triggerTimer() {
+            if (runningState) {
+                clearInterval(loopInterval); runningState = false;
+                let calculation = ((Date.now() - initialTime) / 1000).toFixed(3);
+                document.getElementById('timeDisplay').innerText = calculation;
+                document.getElementById('timeStatus').innerText = "RUN CAPTURED";
+                appendHistoryItem(calculation);
+            } else {
+                runningState = true; initialTime = Date.now();
+                document.getElementById('timeStatus').innerText = "SAMPLING PERIOD...";
+                loopInterval = setInterval(() => {
+                    document.getElementById('timeDisplay').innerText = ((Date.now() - initialTime) / 1000).toFixed(3);
+                }, 10);
+            }
+        }
+        window.addEventListener('keydown', (e) => { if (e.code === 'Space') { e.preventDefault(); triggerTimer(); } });
+
+        function appendHistoryItem(timeVal) {
+            runningHistory.push(timeVal); const container = document.getElementById('logWrapper');
+            if (runningHistory.length === 1) container.innerHTML = ''; 
+            let numTime = parseFloat(timeVal); let commentText = "", classStyle = "";
+            if (numTime <= 20.99) { commentText = "🔥 GODLY SPEED! Exceptional performance runtime!"; classStyle = "comment-godly"; }
+            else if (numTime <= 35.00) { commentText = "🔥 Good Pace! Breaking beneath your 35-second barrier trace limits."; classStyle = "comment-good"; }
+            else { commentText = "📋 Standard Baseline Run. Work on lookup structures."; classStyle = "comment-standard"; }
+            let element = document.createElement('li');
+            element.innerHTML = `<div class="log-meta-line"><span>Run #${runningHistory.length}</span><strong style="color:var(--accent-orange);">${timeVal}s</strong></div><div class="comment-box ${classStyle}">${commentText}</div>`;
+            container.prepend(element);
+        }
+
+        // --- SCOREBOARD MATRIX ENGINE ---
+        let selectedSport = 'tennis'; let valA = 0, valB = 0; let scoreSetsA = 0, scoreSetsB = 0; let currentServingSide = 1;
+        const courtTennisMap = ["0", "15", "30", "40", "Ad"];
+        function toggleSport(mode) { selectedSport = mode; document.getElementById('btnTen').classList.toggle('active', mode === 'tennis'); document.getElementById('btnBad').classList.toggle('active', mode === 'badminton'); clearScoreboard(); }
+        function refreshInterface() {
+            let outA = valA, outB = valB;
+            if (selectedSport === 'tennis') {
+                if (valA <= 3 && valB <= 3) { outA = courtTennisMap[valA]; outB = courtTennisMap[valB]; if (valA === 3 && valB === 3) { outA = "Deuce"; outB = "Deuce"; } }
+                else {
+                    let margin = valA - valB;
+                    if (margin === 0) { outA = "Deuce"; outB = "Deuce"; }
+                    else if (margin === 1) { outA = "Ad"; outB = "40"; }
+                    else if (margin === -1) { outA = "40"; outB = "Ad"; }
+                    else if (margin >= 2) { scoreSetsA++; valA = 0; valB = 0; outA = "0"; outB = "0"; }
+                    else if (margin <= -2) { scoreSetsB++; valA = 0; valB = 0; outA = "0"; outB = "0"; }
+                }
+            } else {
+                if (valA >= 21 || valB >= 21) {
+                    if ((Math.abs(valA - valB) >= 2) || valA === 30 || valB === 30) {
+                        if (valA > valB) scoreSetsA++; else scoreSetsB++;
+                        valA = 0; valB = 0;
+                    }
+                }
+            }
+            document.getElementById('scoreA').innerText = outA; document.getElementById('scoreB').innerText = outB;
+            document.getElementById('setsA').innerText = (selectedSport === 'tennis' ? "Games: " : "Sets: ") + scoreSetsA;
+            document.getElementById('setsB').innerText = (selectedSport === 'tennis' ? "Games: " : "Sets: ") + scoreSetsB;
+            document.getElementById('team1Frame').classList.toggle('serving-now', currentServingSide === 1);
+            document.getElementById('team2Frame').classList.toggle('serving-now', currentServingSide === 2);
+        }
+        function addPoint(side) { if (side === 1) valA++; else valB++; if (selectedSport === 'badminton') currentServingSide = side; refreshInterface(); }
+        function removePoint(side) { if (side === 1 && valA > 0) valA--; if (side === 2 && valB > 0) valB--; refreshInterface(); }
+        function togglePossession() { currentServingSide = currentServingSide === 1 ? 2 : 1; refreshInterface(); }
+        function clearScoreboard() { valA = 0; valB = 0; scoreSetsA = 0; scoreSetsB = 0; currentServingSide = 1; refreshInterface(); }
+
+        // --- AUDIO CORES ---
+        const audioEngineCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const musicalPitches = { 'C4': 261.63, 'C#4': 277.18, 'D4': 293.66, 'D#4': 311.13, 'E4': 329.63, 'F4': 349.23, 'F#4': 369.99, 'G4': 392.00, 'G#4': 415.30, 'A4': 440.00, 'A#4': 466.16, 'B4': 493.88, 'C5': 523.25, 'C#5': 554.37, 'D5': 587.33, 'D#5': 622.25, 'E5': 659.25, 'F5': 698.46 };
+        function triggerOscNote(pitch) {
+            if (!musicalPitches[pitch]) return;
+            let osc = audioEngineCtx.createOscillator(); let gain = audioEngineCtx.createGain();
+            osc.type = document.getElementById('oscType').value; osc.frequency.value = musicalPitches[pitch];
+            gain.gain.setValueAtTime(0.35, audioEngineCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioEngineCtx.currentTime + 1.4);
+            osc.connect(gain); gain.connect(audioEngineCtx.destination); osc.start(); osc.stop(audioEngineCtx.currentTime + 1.4);
+        }
+
+        // --- METRONOME ENGINE ---
+        let metroBPM = 120; let isMetroPlaying = false; let metroIntervalId = null; let lastTapTime = 0;
+        function changeBPM(val) { metroBPM = val; document.getElementById('bpmValue').innerText = val; if (isMetroPlaying) { stopMetronome(); startMetronome(); } }
+        function toggleMetronome() { if (isMetroPlaying) stopMetronome(); else startMetronome(); }
+        function startMetronome() { isMetroPlaying = true; document.getElementById('metroPlayBtn').innerText = "Kill Pulse"; metroIntervalId = setInterval(playClick, (60 / metroBPM) * 1000); }
+        function stopMetronome() { isMetroPlaying = false; document.getElementById('metroPlayBtn').innerText = "Engage Pulse"; clearInterval(metroIntervalId); }
+        function playClick() {
+            let osc = audioEngineCtx.createOscillator(); let gain = audioEngineCtx.createGain();
+            osc.frequency.setValueAtTime(950, audioEngineCtx.currentTime); gain.gain.setValueAtTime(0.3, audioEngineCtx.currentTime); gain.gain.exponentialRampToValueAtTime(0.001, audioEngineCtx.currentTime + 0.05);
+            osc.connect(gain); gain.connect(audioEngineCtx.destination); osc.start(); osc.stop(audioEngineCtx.currentTime + 0.06);
+            let pulse = document.getElementById('visualPulse'); pulse.classList.add('flash'); setTimeout(() => pulse.classList.remove('flash'), 55);
+        }
+        function tapBPM() { let cur = Date.now(); if (lastTapTime !== 0) { let tBPM = Math.round(60000 / (cur - lastTapTime)); if (tBPM >= 40 && tBPM <= 240) { document.getElementById('bpmSlider').value = tBPM; changeBPM(tBPM); } } lastTapTime = cur; }
+    </script>
+</body>
+</html>
